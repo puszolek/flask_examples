@@ -11,6 +11,11 @@ import sys
 app = flask.Flask(__name__)
 exclude = string.punctuation
 
+#post text
+def post_text(host, text):
+    resp = requests.post(host, data=text.encode('utf-8'))
+    return resp.text
+
 
 #post json to the specified host
 def post_json(js, host):
@@ -25,7 +30,7 @@ def api_root():
 
 @app.route('/', methods=['POST'])
 def api_response():
-    
+
     #receive json
     js = flask.request.get_json()
 
